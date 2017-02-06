@@ -1,42 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CSharpDemo
+class Rectangle
 {
-	public class Box
+	protected double length;
+	protected double width;
+
+	public Rectangle(double l, double w)
 	{
-		public double len;
-		public double wid;
-		public double hei;
+		length = l;
+		width = w;
 	}
 
-	class Program
+	public double GetArea()
 	{
-		static void Main(string[] args)
-		{
-			Box box1 = new Box();
-			Box box2 = new Box();
+		return length * width;
+	}
 
-			double V = 0;
+	public void Display()
+	{
+		Console.WriteLine("长度为:{0}", length);
+		Console.WriteLine("宽度为:{0}", width);
+		Console.WriteLine("面积为:{0}", GetArea());
+	}
+}
 
-			box1.len = 5.0;
-			box1.wid = 6.0;
-			box1.hei = 7.0;
+class Tabletop : Rectangle
+{
+	private double cost;
 
-			//describtion of box2
-			box2.len = 10.0;
-			box2.wid = 12.0;
-			box2.hei = 13.0;
+	public Tabletop(double l, double w) : base(l, w)
+	{}
 
-			V = box1.len * box1.wid * box1.hei;
-			Console.WriteLine("Box1 V is:{0}", V);
+	public double GetCost()
+	{
+		double cost;
+		cost = GetArea() * 70;
+		return cost;
+	}
 
-			V = box2.len * box2.wid * box2.hei;
-			Console.WriteLine("Box2 V is:{0}", V);
-			Console.ReadKey();
-		}
+	public void Display()
+	{
+		base.Display();
+		Console.WriteLine("成本为:{0}", GetCost());
+	}
+}
+
+class RectangleTest
+{
+	public static void Main(string[] args)
+	{
+		Tabletop t = new Tabletop(4.5, 7.5);
+		t.Display();
+		Console.ReadLine();
 	}
 }
